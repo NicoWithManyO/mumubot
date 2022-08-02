@@ -22,6 +22,13 @@ class ReferentCommand(commands.Cog):
         to_save.save()
         await ctx.respond(f"> ✅ {Event.objects.filter(slug=temp)}")
 
+    @slash_command(name="event", guild_ids=[778509735397031936, 269040955380858880])
+    async def event(self, ctx, option: str):
+        if option == "list":
+            for e in Event.objects.all():
+                await ctx.send(f"{e}")
+        await ctx.respond(f"> ✅ FIN")
+            
     @commands.Cog.listener()
     async def on_ready(self):
         print(f"{self} ready")
