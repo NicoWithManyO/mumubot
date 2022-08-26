@@ -7,6 +7,9 @@ class Event(models.Model):
     slug = models.SlugField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     
+    owner = models.ForeignKey('member.Member', blank=True, related_name="owner", null=True, on_delete=models.SET_NULL)
+    engaged_members = models.ManyToManyField('member.Member', blank=True)
+    
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
 
