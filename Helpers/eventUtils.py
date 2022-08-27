@@ -14,5 +14,13 @@ async def auto_add_event(event, owner):
 
 async def auto_add_member_to_event(event, member):
     m = Member.objects.all().filter(discord_id=member.id)
-    print(event.engaged_members.add(m[0]))
+    event.engaged_members.add(m[0])
+    return m
+
+async def auto_remove_member_to_event(event, member):
+    m = Member.objects.all().filter(discord_id=member.id)
+    event.engaged_members.remove(m[0])
+    return m
+
+
     
