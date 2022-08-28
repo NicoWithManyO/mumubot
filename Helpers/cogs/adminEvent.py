@@ -19,8 +19,12 @@ class ReferentCommand(commands.Cog):
     @slash_command(name="event", guild_ids=[778509735397031936, 269040955380858880])
     async def event(self, ctx, event: int):
         e = Event.objects.filter(id=int(event))
-        await ctx.respond("o")
-        confirmator = await ctx.send("waiting ...")
+        if not e:
+            await ctx.respond(f"> 🚫 L'évènement n'existe pas")
+            for e in Event.objects.all():
+                await ctx.send(f"`{e}`")
+            return
+        confirmator = await ctx.send("MuMuBot Event Module")
         view = Confirm(ctx.user, event, confirmator)
         await confirmator.edit(embed=await event_embed(e[0]), view=view)
         # await confirmator.delete()

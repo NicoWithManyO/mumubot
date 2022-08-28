@@ -12,7 +12,9 @@ async def event_embed(event):
         e.add_field(name=f"Inscrits", value='\n'.join(participants))
     else:
         e.add_field(name=f"Inscrits", value="aucun")
+
     e.add_field(name=f":timer:", value=event.duration, inline=False)
     e.add_field(name=f":date: start", value=event.start_date, inline=True)
     e.add_field(name=f":date: end", value=event.end_date, inline=True)
+    e.add_field(name=f"event owner", value=event.owner, inline=False)
     return e
