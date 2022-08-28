@@ -19,12 +19,13 @@ class ReferentCommand(commands.Cog):
     @slash_command(name="event", guild_ids=[778509735397031936, 269040955380858880])
     async def event(self, ctx, event: int):
         e = Event.objects.filter(id=int(event))
+        await ctx.respond("o")
+        confirmator = await ctx.send("waiting ...")
+        view = Confirm(ctx.user, event, confirmator)
+        await confirmator.edit(embed=await event_embed(e[0]), view=view)
+        # await confirmator.delete()
         
-        view = Confirm(ctx.user, event)
-        confirmator = await ctx.send(embed=await event_embed(e[0]), view=view)
-        await view.wait()
-        await confirmator.delete()
-        await ctx.respond(embed=await event_embed(e[0]))
+        # await ctx.send(embed=await event_embed(e[0]))
 
     @slash_command(name="addevent", description="(admin) Créer un évènement", guild_ids=[778509735397031936, 269040955380858880])
     async def addevent(self, ctx, name: str):
