@@ -13,3 +13,14 @@ class Member(models.Model):
 
     def __str__(self):
         return f"{self.name}#{self.discriminator}"
+
+
+class Guild(models.Model):
+    discord_id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=128, blank=True)
+    
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
+    
+    def __str__(self):
+        return f"{self.name}"

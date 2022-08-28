@@ -11,10 +11,16 @@ from django.utils.text import slugify
 
 from member.models import Member
 from event.models import Event
+from event.admin import EventResource
 
 class ReferentCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+    
+    @slash_command(name="temp", guild_ids=[778509735397031936, 269040955380858880])
+    async def  temp(self, ctx):
+        data = EventResource().export()
+        await ctx.respond(data.csv)
     
     @slash_command(name="event", guild_ids=[778509735397031936, 269040955380858880])
     async def event(self, ctx, event: int):
@@ -25,11 +31,10 @@ class ReferentCommand(commands.Cog):
                 await ctx.send(f"`{e}`")
             return
         confirmator = await ctx.send("MuMuBot Event Module")
+        await ctx.respond(f"event ok")
         view = Confirm(ctx.user, event, confirmator)
         await confirmator.edit(embed=await event_embed(e[0]), view=view)
-        # await confirmator.delete()
-        
-        # await ctx.send(embed=await event_embed(e[0]))
+
 
     @slash_command(name="addevent", description="(admin) Créer un évènement", guild_ids=[778509735397031936, 269040955380858880])
     async def addevent(self, ctx, name: str):
