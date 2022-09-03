@@ -38,7 +38,7 @@ class ReferentCommand(commands.Cog):
 
     @slash_command(name="addevent", description="(admin) Créer un évènement", guild_ids=[778509735397031936, 269040955380858880])
     async def addevent(self, ctx, name: str):
-        e = await auto_add_event(name, ctx.user)      
+        e = await auto_add_event(name, ctx.user, ctx.guild)      
         if not e[1]:
             await ctx.respond(f"> 🚫 {e[0]} déjà existant")
         else:

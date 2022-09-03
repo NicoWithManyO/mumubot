@@ -4,6 +4,11 @@ from discord.ext import commands
 from Helpers.eventUtils import auto_add_member_to_event, auto_remove_member_to_event
 from event.models import Event
 from Helpers.templatesToPublish import event_embed, details_event_embed
+from member.models import Guild
+
+async def guildsInit(bot):
+    for guild in bot.guilds:
+        Guild.objects.get_or_create(discord_id=guild.id, name=guild.name)
 
 class Confirm(discord.ui.View):
     def __init__(self, instantiator, e, confirmator):

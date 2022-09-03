@@ -15,6 +15,9 @@ class Event(models.Model):
     duration = models.DurationField(blank=True, null=True)
     max_participants = models.IntegerField(default=0)
     is_public = models.BooleanField(default=True)
+    open_for_registrations = models.BooleanField(default=True)
+    
+    origin = models.ForeignKey("member.Guild", on_delete=models.SET_NULL, null=True, blank=True)
     
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)

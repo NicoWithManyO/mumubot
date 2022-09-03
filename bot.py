@@ -7,7 +7,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "MuMuBot.settings")
 os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 django.setup()
 
-extensions_list = ['Helpers.cogs.adminEvent', ]
+extensions_list = ['Helpers.cogs.adminEvent', 'Helpers.cogs.adminGuild' ]
 all_guilds = [ 269040955380858880 ]
 
 
